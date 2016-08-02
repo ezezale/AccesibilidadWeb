@@ -2,12 +2,129 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Enlace D{% endblock %}</title>
+        {% block stylesheets %}
+			<link rel="stylesheet" media="screen,projection" type="text/css" href="{{ asset(main.css) }}">
+   			<link rel="stylesheet" media="print" type="text/css" href="{{ asset(print.css) }}">
+    		<link rel="stylesheet" media="aural" type="text/css" href="{{ asset(aural.css) }}">
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        
     </head>
     <body>
-        {% block body %}{% endblock %}
+    	<!-- Main -->
+    	<div id="main" class="box">
+    		<!-- Header -->
+    		<div id="header">
+                <!-- Logotyp -->
+                <h1 id="logo"><a href="./" title="Enlace D [Go to homepage]">Enlace <strong>D</strong><span></span></a></h1>
+                <hr class="noscreen">          
+        
+                <!-- Quick links -->
+                <div class="noscreen noprint">
+                    <p><em>Enlaces Rápidos: <a href="#news">Noticias</a>, <a href="#sites">Sitios</a>, <a href="#tutorial">Tutoriales</a>, <a href="#search">Buscar</a>.</em></p>
+                    <hr>
+                </div>
+        
+                <!-- Search -->
+                <div id="search" class="noprint">
+                    <form action="" method="get">
+                        <fieldset><legend>Buscar</legend>
+                            <label><span class="noscreen">Encontrar:</span>
+                            <span id="search-input-out"><input type="text" name="" id="search-input" size="30"></span></label>
+                            <input type="image" src="design/search_submit.gif" id="search-submit" value="OK">
+                        </fieldset>
+                    </form>
+                </div> <!-- /search -->
+            </div>
+            <!-- /Header -->
+            <!-- Main menu (tabs) -->
+            <div id="tabs" class="noprint">
+                <h3 class="noscreen">Navegación</h3>
+                <ul class="box">
+                    <li id="active"><a href="#">Inicio<span class="tab-l"></span><span class="tab-r"></span></a></li> <!-- Active -->
+                    <li><a href="#">Noticias y Novedades<span class="tab-l"></span><span class="tab-r"></span></a></li>
+                    <li><a href="#">Enlaces<span class="tab-l"></span><span class="tab-r"></span></a></li>
+                    <li><a href="#">Tutoriales<span class="tab-l"></span><span class="tab-r"></span></a></li>
+                    <li><a href="#">Acerca de Nosotros<span class="tab-l"></span><span class="tab-r"></span></a></li>
+                    <li><a href="#">Contacto<span class="tab-l"></span><span class="tab-r"></span></a></li>
+                </ul>
+            <hr class="noscreen">
+            </div>
+            <!-- /tabs -->
+            <!-- Page (2 columns) -->
+            <div id="page" class="box">
+                <div id="page-in" class="box">
+            
+                    <div id="strip" class="box noprint">
+            
+                        <!-- RSS feeds -->
+                        <p id="rss"><strong>RSS:</strong> <a href="#">noticias</a> / <a href="#">comentarios</a></p>
+                        <hr class="noscreen">
+            
+                        <!-- Breadcrumbs -->
+                        <p id="breadcrumbs">Estas en: {% block currentPos %}{% endblock %}</p>
+                        <hr class="noscreen">
+                        
+                    </div> <!-- /strip -->
+            
+                    <!-- Content -->
+                    <div id="content">
+                        {% block body %}{% endblock %}
+                    </div> <!-- /content -->
+                    <!-- Right column -->
+                    <div id="col" class="noprint">
+                        <div id="col-in">            
+                            <!-- Sitio -->
+                            <h3><span>Sitios</span></h3>
+                            <ul id="site">
+                            	{% for site in sites %}
+                                	<li {% if current is defined and site == current  %}id="site-active" {%  endif %}><a href="./Sitios/{% site.id %}">{% site %}</a><a class="externalink"  target="_Blank" href="{% site.url %}">{% site %}</a></li>
+                                {% endfor %}
+                            </ul>
+            
+                            <hr class="noscreen">
+            
+                            <!-- Tutorial -->
+                            <h3><span>Tutoriales</span></h3>
+            
+                            <ul id="tutorial">
+                            	{% for tutorial in tutorials %}
+                                	<li {% if current is defined and tutorial == current  %}id="tutorial-active" {%  endif %}><a href="{% tutorial.url %}">{% tutorial.view() %}</a></li>
+                                {% endfor %}
+                            </ul>
+            
+                            <hr class="noscreen">
+            
+                            <!-- News -->
+                            <h3><span>Últimas Noticias</span></h3>
+                            <ul id="news">
+                                {% for new in news %}
+                                	<li {% if current is defined and new == current  %}id="news-active" {%  endif %}><a href="{% new.url %}">{% new.view() %}</a></li>
+                                {% endfor %}
+                            </ul>
+            
+                            <hr class="noscreen">
+                            
+                             <!-- About Me -->
+                            <h3><span><a href="#">About Me</a></span></h3>
+            
+                            <div id="about-me">
+                                <p><img src="design/tmp_photo.gif" id="me" alt="Yeah, it´s me!">
+                                <strong>John Doe</strong><br>
+                                Age: 26<br>
+                                Dallas, TX<br>
+                                <a href="#">Profile on MySpace</a></p>
+                            </div> <!-- /about-me -->
+            
+                            <hr class="noscreen">
+                        
+                        </div> <!-- /col-in -->
+                    </div> <!-- /col -->
+            
+                </div> <!-- /page-in -->
+             </div>
+    	</div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -13,14 +13,16 @@ web_profiler:
 
 monolog:
     handlers:
+        console:
+            type:   console
+            channels: [ !event , !doctrine ]
         main:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
-            channels: [!event]
-        console:
-            type:   console
-            channels: [!event, !doctrine]
+            channels: [ !event ]
+            
+        
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
         #firephp:
@@ -32,3 +34,7 @@ monolog:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+assetic:
+    use_controller: true
+    

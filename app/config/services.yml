@@ -7,3 +7,10 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+# app/config/services.yml
+     app.news_uploader:
+        class: AppBundle\Service\FileUploader
+        arguments: ['%image_news%']
+     app.site_uploader:
+        class: AppBundle\Service\FileUploader
+        arguments: ['%image_site%']
