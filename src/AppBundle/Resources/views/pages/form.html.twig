@@ -1,0 +1,44 @@
+{% extends "AppBundle::base.html.twig" %}
+
+{% block currentPos %}
+	<a href="/">Inicio</a> &gt; <a href="../../{{ typeForm }}">{{ typeFormLabel }}</a> &gt; <strong>Edición</strong>            
+{% endblock %}
+{% block body %}
+	<div id="wrapper">	    
+	    {{ form_start(form) }}
+        <fieldset class="form_row">
+            {{ form_row(form.name) }}
+        </fieldset>
+        {% if form.url is defined %}
+            <fieldset class="form_row">
+                {{ form_row(form.url) }}
+            </fieldset>
+        {% endif %}
+        <fieldset class="form_row">
+            {{ form_row(form.description) }}
+        </fieldset>
+        {% if form.image is defined %}
+            <fieldset class="form_row">
+                <div>{{ form_label(form.image) }}</div>
+                <div>
+                    {% if noImageErr is defined %}<ul><li>{{ noImageErr }}</li></ul>{%  endif %}
+                    {{ form_errors(form.image) }}
+                </div>
+                <div>
+                    {{ form_widget(form.image) }}
+                </div>
+                {% if current is defined and current.image is not null %}
+                	<div class="imageContainer">
+                		<img class="image_news" src="{{ asset('uploads/image-' ~ typeForm ~ '/' ~ current.image.filename) }}" alt="{{ current.name }}">
+                		<!-- <span></span>  -->
+                	</div>
+                {% endif %}
+            </fieldset>
+        {% endif %}
+        <div class="divSubmmit">
+            {{ form_widget(form.save,{'attr': {'class': 'submitButton'}}) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+

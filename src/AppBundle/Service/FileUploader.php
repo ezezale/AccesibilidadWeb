@@ -1,6 +1,6 @@
 <?php
 // src/AppBundle/FileUploader.php
-namespace AppBundle;
+namespace AppBundle\Service;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -13,12 +13,19 @@ class FileUploader
 		$this->targetDir = $targetDir;
 	}
 
-	public function upload(UploadedFile $file)
+	public function upload(&$obj)
 	{
-		$fileName = md5(uniqid()).'.'.$file->guessExtension();
-
-		$file->move($this->targetDir, $fileName);
-
-		return $fileName;
+		if ($obj->getImage()){
+			$fileName = $obj->getName().'.'.$obj->getImage()->guessExtension();
+	
+			$obj->getImage()->move($this->targetDir, $fileName);
+		
+			return $fileName;
+		}
+		return null;
+	}
+	
+	public function getTargetDir(){
+		return $this->targetDir;
 	}
 }

@@ -3,10 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\MappedSuperclass
+ * @ORM\HasLifecycleCallbacks
  */
 abstract class DefaultEntity {
 
@@ -25,9 +25,6 @@ abstract class DefaultEntity {
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime()
-     * @Assert\NotNull()
-     * @Assert\NotBlank()
      */
     private $created;
 
@@ -103,6 +100,11 @@ abstract class DefaultEntity {
 
     public function __toString(){
     	return this.getName();
+    }
+    
+    
+    public function getShortDescription(){
+    	return explode(".", $this->getDescription(),2)[0].".";
     }
     
 }

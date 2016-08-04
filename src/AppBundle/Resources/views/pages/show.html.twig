@@ -1,0 +1,27 @@
+{% extends "AppBundle::base.html.twig" %}
+
+
+{% block currentPos %}
+	<a href="/">Inicio</a> &gt; <a href="../../{{ typeForm }}">{{ typeFormLabel }}</a> &gt; <strong>{{ current.name }}</strong>            
+{% endblock %}
+{% block body %}
+	<div id="content">
+	 	<div class="article">
+		 	<h2><span>{{ current.name }}</span></h2>
+                <p class="info noprint">
+                    <span class="date">{{ current.created|date('Y-m-d H:i:s') }}</span><span class="noscreen">,</span>
+                    <span class="cat"><a href="/{{ typeForm }}/edit/{{ current.id }}">Editar</a></span><span class="noscreen">,</span>
+                    <span class="comments"><a href="#">Comments</a></span>
+                </p>
+                {% if current.image is defined %}
+					<img  class="image_{{ typeForm }}" src="{{ asset('uploads/image-' ~ typeform ~ '/' ~ current.image) }}" alt="{{ current.name }}">
+				{%  endif %}
+				{% if current.url is defined %}
+					<p><a class="externalink" src="{{ current.url }}" target="_blank">{{ current.url }}</a></p>
+				{%  endif %}
+                <p>{{ current.description() }}</p>
+		 	</div>
+		 {%  endfor %}
+	</div>
+{% endblock %}
+

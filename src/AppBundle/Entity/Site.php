@@ -13,7 +13,7 @@ class Site extends DefaultEntity{
 	/**
 	 * @ORM\Column(type="string", length=130, unique=TRUE)
 	 * @Assert\NotNull(message="Debe escribir un nombre")
-	 * @Assert\NotBlank()
+	 * @Assert\NotBlank(message="Debe escribir un nombre")
      * @Assert\Length(
      *      min = "2",
      *      max = "130",
@@ -25,7 +25,7 @@ class Site extends DefaultEntity{
 	
 	/**
 	 * @ORM\Column(type="string", length=130, unique=TRUE)
-	 * @Assert\Url()
+	 * @Assert\Url(message = "La dirección '{{ value }}' no es valida")
 	 */
 	private $url;
 	
@@ -38,6 +38,7 @@ class Site extends DefaultEntity{
 	 *  			maxSizeMessage = "El archivo es muy grande, El tamaño maximo permitido es {{ limit }} {{ suffix }}",
 	 *  			disallowEmptyMessage = "No se permiten archivos vacios ( Ej. de 0 bytes)"
 	 *  )
+	 *  
 	 */
 	private $image;
 	
@@ -49,7 +50,7 @@ class Site extends DefaultEntity{
 	 *      minMessage = "La descripción debe tener como minimo {{ limit }} caracteres",
 	 * )
 	 */
-	private $descripcion;
+	private $description;
 	
 	
 	/**
@@ -59,9 +60,9 @@ class Site extends DefaultEntity{
 	 *
 	 * @return News
 	 */
-	public function setDescripcion($descripcion)
+	public function setDescription($description)
 	{
-		$this->descripcion = $descripcion;
+		$this->description = $description;
 	
 		return $this;
 	}
@@ -71,9 +72,9 @@ class Site extends DefaultEntity{
 	 *
 	 * @return string
 	 */
-	public function getDescripcion()
+	public function getDescription()
 	{
-		return $this->descripcion;
+		return $this->description;
 	}
 	
 	/**

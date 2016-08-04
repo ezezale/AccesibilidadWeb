@@ -32,7 +32,7 @@ class News extends DefaultEntity{
      *      minMessage = "La descripción debe tener como minimo {{ limit }} caracteres",
      * )
 	 */
-	private $descripcion;
+	private $description;
 
 	/**
 	 * @ORM\Column(type="string")
@@ -100,9 +100,9 @@ class News extends DefaultEntity{
      *
      * @return News
      */
-    public function setDescripcion($descripcion)
+    public function setDescription($description)
     {
-        $this->descripcion = $descripcion;
+        $this->description = $description;
 
         return $this;
     }
@@ -112,9 +112,9 @@ class News extends DefaultEntity{
      *
      * @return string
      */
-    public function getDescripcion()
+    public function getDescription()
     {
-        return $this->descripcion;
+        return $this->description;
     }
     
 }

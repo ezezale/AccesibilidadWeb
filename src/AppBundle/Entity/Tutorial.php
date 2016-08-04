@@ -26,7 +26,7 @@ class Tutorial extends DefaultEntity{
 
     /**
     * @ORM\ManyToOne(targetEntity="Site", cascade={"remove"}, fetch="EAGER")
-    * @ORM\JoinColumn(name="site_id", referencedColumnName="id")
+    * @ORM\JoinColumn(name="site_id", referencedColumnName="id", nullable = false)
     * @Assert\Type(type="AppBundle\Entity\Site")
     * @Assert\NotNull(message="Debe seleccionar o crear la descripción del Sitio correspondiente al Tutorial")
     */
@@ -40,7 +40,7 @@ class Tutorial extends DefaultEntity{
      *      minMessage = "La descripción debe tener como minimo {{ limit }} caracteres",
      * )
 	 */
-	private $descripcion;
+	private $description;
 
 	/**
 	 * Set name
@@ -68,27 +68,27 @@ class Tutorial extends DefaultEntity{
 
 
     /**
-     * Set descripcion
+     * Set description
      *
-     * @param string $descripcion
+     * @param string $description
      *
      * @return Tutorial
      */
-    public function setDescripcion($descripcion)
+    public function setDescription($description)
     {
-        $this->descripcion = $descripcion;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get descripcion
+     * Get description
      *
      * @return string
      */
-    public function getDescripcion()
+    public function getDescription()
     {
-        return $this->descripcion;
+        return $this->description;
     }
 
     /**

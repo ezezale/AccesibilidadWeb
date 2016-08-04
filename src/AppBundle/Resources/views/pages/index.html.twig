@@ -1,0 +1,29 @@
+{% extends "AppBundle::base.html.twig" %}
+
+{% block currentPos %}
+	<strong>Inicio</strong>            
+{% endblock %}
+{% block body %}
+	<div id="wrapper" class="carrousel relative">
+		<div class="carrousel__container mod--hidden" 
+               data-carrousel-btn-previous-img="{{ asset('flecha_left.gif') }}" 
+               data-carrousel-btn-next-img="{{ asset('flecha_right.gif') }}"
+               data-carrousel-btn-previous-text="Show previous panel"
+               data-carrousel-btn-next-text="Show next panel"
+               data-carrousel-prefix-classes="news"
+               data-carrousel-span-text-class="invisible"
+               data-carrousel-transition="fade"
+               data-carrousel-existing-hx="h3">
+			{% for n in news %}
+    			<div class="carrousel__content">
+    				<img  class="image_news" src="{{ asset('uploads/image-news/' ~ n.image) }}" alt="{{ n.name }}">
+            		<h3>{{ n.name }}</h3>
+              		<p>{{ n.getShortDescription() }}</p>
+              		<p class="btn-more box noprint"><strong><a href="./">Ampliar</a></strong></p>
+   				</div>
+   			{% endfor %}
+  		</div>
+    </div>
+    
+{% endblock %}
+

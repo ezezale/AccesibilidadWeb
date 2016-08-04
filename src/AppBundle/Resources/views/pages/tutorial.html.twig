@@ -1,0 +1,25 @@
+{% extends "AppBundle::base.html.twig" %}
+
+
+{% block currentPos %}
+	<a href="../">Inicio</a> &gt; <strong>Tutoriales</strong>            
+{% endblock %}
+{% block body %}
+	<div id="content">
+		<p class="create-article"><a href="/tutorial/edit/">Agregar un Nuevo Tutorial</a></span><span class="noscreen">,</span></p>
+		 {% for t in tutorials %}
+		 	<div class="article">
+		 		<h2><span><a href="#">{{ t.name }}</a></span></h2>
+                <p class="info noprint">
+                    <span class="date">{{ t.created|date('Y-m-d H:i:s') }}</span><span class="noscreen">,</span>
+                    <span class="cat"><a href="/tutorial/edit/{{  t.id }}">Editar</a></span><span class="noscreen">,</span>
+                    <span class="comments"><a href="#">Comments</a></span>
+                </p>
+                <p>{{ t.getShortDescription() }}</p>
+
+                <p class="btn-more box noprint"><strong><a href="/tutorial/show/{{ t.id }}">Ampliar</a></strong></p>
+		 	</div>
+		 {%  endfor %}
+	</div>
+{% endblock %}
+

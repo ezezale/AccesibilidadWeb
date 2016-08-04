@@ -1,0 +1,26 @@
+{% extends "AppBundle::base.html.twig" %}
+
+
+{% block currentPos %}
+	<a href="../">Inicio</a> &gt; <strong>Enlaces</strong>            
+{% endblock %}
+{% block body %}
+	<div id="content">
+		<p class="create-article"><a href="/site/edit/">Agregar un Nuevo Enlace</a></span><span class="noscreen">,</span></p>
+		 {% for s in sites %}
+		 	<div class="article">
+		 		<h2><span><a href="#">{{ s.name }}</a></span></h2>
+                <p class="info noprint">
+                    <span class="date">{{ s.created|date('Y-m-d H:i:s') }}</span><span class="noscreen">,</span>
+                    <span class="cat"><a href="/site/edit/{{ s.id }}">Editar</a></span><span class="noscreen">,</span>
+                    <span class="comments"><a href="#">Comments</a></span>
+                </p>
+				
+                <p><img  class="image_news" src="{{ asset('uploads/image-site/' ~ s.image) }}" alt="{{ s.name }}">{{ s.getShortDescription() }}</p>
+
+                <p class="btn-more box noprint"><strong><a href="/site/show/{{ s.id }}">Ampliar</a></strong></p>
+		 	</div>
+		 {%  endfor %}
+	</div>
+{% endblock %}
+

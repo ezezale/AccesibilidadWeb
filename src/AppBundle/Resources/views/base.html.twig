@@ -4,11 +4,17 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Enlace D{% endblock %}</title>
         {% block stylesheets %}
-			<link rel="stylesheet" media="screen,projection" type="text/css" href="{{ asset(main.css) }}">
-   			<link rel="stylesheet" media="print" type="text/css" href="{{ asset(print.css) }}">
-    		<link rel="stylesheet" media="aural" type="text/css" href="{{ asset(aural.css) }}">
+			<link rel="stylesheet" media="screen,projection" type="text/css" href="{{ asset('bundles/app/css/main.css') }}">
+   			<link rel="stylesheet" media="print" type="text/css" href="{{ asset('bundles/app/css/print.css') }}">
+    		<link rel="stylesheet" media="aural" type="text/css" href="{{ asset('bundles/app/css/aural.css') }}">
+    		<link rel="stylesheet" media="screen,projection" type="text/css" href="{{ asset('bundles/app/css/carrousel.css') }}">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% javascripts
+            '@jquery_and_plugins'
+            '@AppBundle/Resources/public/js/*' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         
     </head>
     <body>
@@ -17,7 +23,7 @@
     		<!-- Header -->
     		<div id="header">
                 <!-- Logotyp -->
-                <h1 id="logo"><a href="./" title="Enlace D [Go to homepage]">Enlace <strong>D</strong><span></span></a></h1>
+                <h1 id="logo"><a href="/" title="Enlace D [Go to homepage]">Enlace <strong>D</strong><span></span></a></h1>
                 <hr class="noscreen">          
         
                 <!-- Quick links -->
@@ -32,7 +38,7 @@
                         <fieldset><legend>Buscar</legend>
                             <label><span class="noscreen">Encontrar:</span>
                             <span id="search-input-out"><input type="text" name="" id="search-input" size="30"></span></label>
-                            <input type="image" src="design/search_submit.gif" id="search-submit" value="OK">
+                            <input type="image" src="{{ asset('bundles/app/design/search_submit.gif') }}" id="search-submit" value="OK">
                         </fieldset>
                     </form>
                 </div> <!-- /search -->
@@ -42,12 +48,9 @@
             <div id="tabs" class="noprint">
                 <h3 class="noscreen">Navegación</h3>
                 <ul class="box">
-                    <li id="active"><a href="#">Inicio<span class="tab-l"></span><span class="tab-r"></span></a></li> <!-- Active -->
-                    <li><a href="#">Noticias y Novedades<span class="tab-l"></span><span class="tab-r"></span></a></li>
-                    <li><a href="#">Enlaces<span class="tab-l"></span><span class="tab-r"></span></a></li>
-                    <li><a href="#">Tutoriales<span class="tab-l"></span><span class="tab-r"></span></a></li>
-                    <li><a href="#">Acerca de Nosotros<span class="tab-l"></span><span class="tab-r"></span></a></li>
-                    <li><a href="#">Contacto<span class="tab-l"></span><span class="tab-r"></span></a></li>
+                    {% for menu in menues  %}
+                    	<li {% if typeForm == menu['name'] %}id="active" {% endif %}><a href="{{ menu['url'] }}">{{ menu['label'] }}<span class="tab-l"></span><span class="tab-r"></span></a></li>
+                    {% endfor %}
                 </ul>
             <hr class="noscreen">
             </div>
@@ -70,16 +73,29 @@
             
                     <!-- Content -->
                     <div id="content">
+                        {% for flashMessage in app.session.flashbag.get('error') %}
+                            <div class="flash-error">
+                                <p>{{ flashMessage }}</p>
+                            </div>
+                        {% endfor %}
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                            <div class="flash-notice">
+                                <p>{{ flashMessage }}</p>
+                            </div>
+                        {% endfor %}
                         {% block body %}{% endblock %}
                     </div> <!-- /content -->
                     <!-- Right column -->
                     <div id="col" class="noprint">
                         <div id="col-in">            
                             <!-- Sitio -->
-                            <h3><span>Sitios</span></h3>
+                            <h3><span>Enlaces</span></h3>
                             <ul id="site">
-                            	{% for site in sites %}
-                                	<li {% if current is defined and site == current  %}id="site-active" {%  endif %}><a href="./Sitios/{% site.id %}">{% site %}</a><a class="externalink"  target="_Blank" href="{% site.url %}">{% site %}</a></li>
+                            	{% for s in sites %}
+                                	<li {% if current is defined and s == current  %}id="active" {%  endif %}>
+                                		<a href="/site/show/{{ s.id }}">{{ s.name }}</a>
+                                		<a class="externalink" hint="Enlace externo" target="_Blank" href="{{ s.url }}"></a>
+                                	</li>
                                 {% endfor %}
                             </ul>
             
@@ -89,8 +105,8 @@
                             <h3><span>Tutoriales</span></h3>
             
                             <ul id="tutorial">
-                            	{% for tutorial in tutorials %}
-                                	<li {% if current is defined and tutorial == current  %}id="tutorial-active" {%  endif %}><a href="{% tutorial.url %}">{% tutorial.view() %}</a></li>
+                            	{% for t in tutorials %}
+                                	<li {% if current is defined and t == current  %}id="active" {%  endif %}><a href="/tutorial/show/{{ t.id }}">{{ t.name }}</a></li>
                                 {% endfor %}
                             </ul>
             
@@ -99,14 +115,14 @@
                             <!-- News -->
                             <h3><span>Últimas Noticias</span></h3>
                             <ul id="news">
-                                {% for new in news %}
-                                	<li {% if current is defined and new == current  %}id="news-active" {%  endif %}><a href="{% new.url %}">{% new.view() %}</a></li>
+                                {% for n in news %}
+                                	<li {% if current is defined and n == current  %}id="active" {%  endif %}><a href="/news/show/{{ n.id }}">{{ n.name }}</a><p>{{ n.getShortDescription() }}</p></li>
                                 {% endfor %}
                             </ul>
             
                             <hr class="noscreen">
-                            
-                             <!-- About Me -->
+                            <!--
+                             <!-- About Me
                             <h3><span><a href="#">About Me</a></span></h3>
             
                             <div id="about-me">
@@ -115,9 +131,9 @@
                                 Age: 26<br>
                                 Dallas, TX<br>
                                 <a href="#">Profile on MySpace</a></p>
-                            </div> <!-- /about-me -->
+                            </div> 
             
-                            <hr class="noscreen">
+                            <hr class="noscreen"> -->
                         
                         </div> <!-- /col-in -->
                     </div> <!-- /col -->

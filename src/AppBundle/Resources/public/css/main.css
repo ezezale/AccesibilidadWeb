@@ -135,7 +135,11 @@ code, kbd, samp {font-family:monospace; font-size:110%;}
     #strip #rss {float:right; width:175px; _width:200px; margin:0; padding-left:25px; background:url("../design/ico_rss.gif") 0 50% no-repeat}
 
 /* Content */
-#content {float:left; width:754px; _width:774px; margin:0; padding:0 0 0 20px;}
+	
+	.flash-notice p {color: #019c01; font-weight: bold; font-size: 20px;}
+	.flash-error p {color: #de4646; font-weight: bold; font-size: 20px;}
+	
+	#content {float:left; width:754px; _width:774px; margin:0; padding:0 0 0 20px;}
 
     /* Content - article */
     #content .article {clear:both; margin:0; padding:20px; background:url("../design/content_article_bg.jpg") 0 0 no-repeat;}
@@ -154,9 +158,11 @@ code, kbd, samp {font-family:monospace; font-size:110%;}
     #content .info span.comments {background:url("../design/ico_comments.gif") 0 50% no-repeat; margin-left:8px;}
 
     /* Content - More */
-    #content .btn-more {margin:0 0 15px 0; padding:0; border:0; position:relative;}
+    #content .btn-more {position: relative; float: initial; right: 5%;}
     #content .btn-more a {display:block; position:absolute; top:0; right:0; width:67px; _width:95px; height:21px; margin:0; padding:0 0 0 28px; background:url("../design/btn_more.gif") 0 0 no-repeat; color:#FFF; text-decoration:none;}
     #content .btn-more a:hover {background:url("../design/btn_more.gif") -95px 0 no-repeat;}
+
+	#content .image_news {height: 100px; float: left; padding-right: 10px;}
 
 /* Right column */
 #col {float:left; width:200px; margin:0; padding:0; background:#CEDBF9 url("../design/col_bg.gif") 0 0 repeat-y;}
@@ -171,10 +177,25 @@ code, kbd, samp {font-family:monospace; font-size:110%;}
     /* Right column - Site */
     #col ul {margin:15px 0; padding:0; list-style:none;}
     #col ul li {margin:0; padding:0; border-bottom:1px solid #E0E8FA;}
-    #col ul li a {padding:3px 0 3px 22px; background:url("../design/ico_archive.gif") 5px 6px no-repeat; text-decoration:none;}
+    #col ul li a {padding:3px 0 3px 22px; background:url("../design/ico_archive.gif") 5px 4px no-repeat; text-decoration:none; font-weight: bold;}
     #col ul li a:hover {background-color:#D3DFF8; color:#192666;}
+    #col ul li a.externalink {background:url("../design/external_link.png") 5px 0px no-repeat; text-decoration:none;}
     #col ul li#active a {background:#E0E8FA url("../design/ico_archive2.gif") 5px 50% no-repeat; font-weight:bold;}
-    #col ul li a#externalink {background:url("../design/external_link.png") 5px 6px no-repeat; text-decoration:none;}
+    #col ul li#active a.externalink {background:#E0E8FA url("../design/external_link.png") 5px 0px no-repeat; font-weight:bold;}
+
+/* Forms */
+
+	fieldset {border: 1px solid #ccc; margin: 15px 0; padding: 10px; width: 90%;}
+	fieldset div label {margin-right: 5px; font-size: 13px; font-weight: bold; }
+	fieldset div input {position: relative; display: block; left: 10%; top: 10px;}
+	fieldset.form_row div textarea {height: 100px; width: 75%; position: relative; display: block; left: 10%; top: 10px;}
+	fieldset div.imageContainer {text-align: center; width: 40%; float: right; position: relative;}
+	fieldset div.imageContainer span {font-size: 10px;}
+
+	fieldset div ul li {color: #ff0000}
+
+    .submitButton {background: #A0B9F3; font-weight: bold; font-size: 16px; color: initial;}
+    .divSubmmit {text-align: center;}
     
 /* Footer */
 #footer {position:relative; clear:both; width:994px; height:60px; margin-bottom:50px; background:url("../design/footer.jpg") 0 0 no-repeat; color:#6685CC;}

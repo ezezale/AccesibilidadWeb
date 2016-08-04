@@ -1,0 +1,26 @@
+{% extends "AppBundle::base.html.twig" %}
+
+
+{% block currentPos %}
+	<a href="../">Inicio</a> &gt; <strong>Noticias y Actualidad</strong>            
+{% endblock %}
+{% block body %}
+	<div id="content">
+		<p class="create-article"><a href="/news/edit/">Agregar un Nuevo Artículo</a></span><span class="noscreen">,</span></p>
+		 {% for n in news %}
+		 	<div class="article">
+		 		<h2><span><a href="#">{{ n.name }}</a></span></h2>
+                <p class="info noprint">
+                    <span class="date">{{ n.created|date('Y-m-d H:i:s') }}</span><span class="noscreen">,</span>
+                    <span class="cat"><a href="/news/edit/{{ n.id }}">Editar</a></span><span class="noscreen">,</span>
+                    <span class="comments"><a href="#">Comments</a></span>
+                </p>
+				<img  class="image_news" src="{{ asset('uploads/image-news/' ~ n.image) }}" alt="{{ n.name }}">
+                <p>{{ n.getShortDescription() }}</p>
+
+                <p class="btn-more box noprint"><strong><a href="/news/show/{{ n.id }}">Ampliar</a></strong></p>
+		 	</div>
+		 {%  endfor %}
+	</div>
+{% endblock %}
+
