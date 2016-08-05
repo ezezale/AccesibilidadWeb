@@ -1,12 +1,12 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: 127.0.0.1
+    database_host: mysql.hostinger.com.ar
     database_port: 3306
-    database_name: accesibilidadweb
-    database_user: admin
-    database_password: admin
+    database_name: u838843438_dcu16
+    database_user: u838843438_admin
+    database_password: dcuadmin
     mailer_transport: smtp
-    mailer_host: 127.0.0.1
+    mailer_host: http://webmail.hostinger.com.ar
     mailer_user: null
     mailer_password: null
     secret: ThisTokenIsNotSoSecretChangeIt
