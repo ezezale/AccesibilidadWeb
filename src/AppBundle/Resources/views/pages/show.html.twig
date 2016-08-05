@@ -14,14 +14,19 @@
                     <span class="comments"><a href="#">Comments</a></span>
                 </p>
                 {% if current.image is defined %}
-					<img  class="image_{{ typeForm }}" src="{{ asset('uploads/image-' ~ typeform ~ '/' ~ current.image) }}" alt="{{ current.name }}">
+					<img  class="image_{{ typeForm }}" src="{{ asset('uploads/image-' ~ typeForm ~ '/' ~ current.image) }}" alt="{{ current.name }}">
 				{%  endif %}
 				{% if current.url is defined %}
-					<p><a class="externalink" src="{{ current.url }}" target="_blank">{{ current.url }}</a></p>
+					<p>Dirección Web: <a class="externalink" href="{{ current.url }}" target="_blank">{{ current.url }}</a></p>
+				{%  endif %}
+				{% if current.site is defined %}
+					<p>
+						Sitio: <a href="site/show/{{ current.site.id }}" >{{ current.site }}</a>
+						Dirección Web: <a class="externalink" href="{{ current.site.url }}" target="_blank">{{ current.site }}</a>
+					</p>
 				{%  endif %}
                 <p>{{ current.description() }}</p>
 		 	</div>
-		 {%  endfor %}
 	</div>
 {% endblock %}
 

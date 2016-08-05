@@ -41,7 +41,11 @@ abstract class AbstractController extends Controller{
 			}
 			
 		}
-		$image = $obj->getImage();
+		if ($objectName = "Tutorial"){
+			$image = null;
+		}else{
+			$image = $obj->getImage();
+		}
 		$this->beforeForm($request,$obj);
 		$form = $this->createForm($type_class_name,$obj);
 		$form->handleRequest($request);
@@ -50,13 +54,16 @@ abstract class AbstractController extends Controller{
 			if ($form->isValid()) {
 				
 				$em = $this->getDoctrine()->getManager();
+				
 				if ($image == null && $form->getData()->getImage() == null){
-					$twigVars['noImageErr'] = "Debe cargar una imagen del Sitio";
+					$twigVars['noImageErr'] = "Debe cargar una imagen";
 				}else{
-					if ($form->getData()->getImage() != null){
-						$this->beforeSave($obj);
-					}else{
-						$form->getData()->setImage($image);
+					if (!($obj instanceof Tutorial)){
+						if ($form->getData()->getImage() != null){
+							$this->beforeSave($obj);
+						}else{
+							$form->getData()->setImage($image);
+						}
 					}
 					if (is_null($id)){
 						$obj = $form->getData();

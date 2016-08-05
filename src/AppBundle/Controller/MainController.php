@@ -53,12 +53,13 @@ class MainController extends AbstractController{
     }
     
     /**
-     * @Route("/tutorial/show/{$id}", name="tutorialShow")
+     * @Route("/tutorial/show/{id}", name="tutorialShow")
      */
     public function tutorialSAction(Request $request, $id){
     
     	$twigVars = $this->baseVarsForTemplate();
     	$twigVars['typeForm'] = "tutorial";
+    	$twigVars['typeFormLabel'] = "Tutorial";
     	$em = $this->getDoctrine()->getManager();
     	$obj = $em->find("AppBundle:Tutorial", $id);
     	if (is_null($obj)){
@@ -74,12 +75,13 @@ class MainController extends AbstractController{
     }
     
     /**
-     * @Route("/site/show/{$id}", name="siteShow")
+     * @Route("/site/show/{id}", name="siteShow")
      */
     public function siteSAction(Request $request, $id){
     
     	$twigVars = $this->baseVarsForTemplate();
     	$twigVars['typeForm'] = "site";
+    	$twigVars['typeFormLabel'] = "Enlace";
     	$em = $this->getDoctrine()->getManager();
     	$obj = $em->find("AppBundle:Site", $id);
     	if (is_null($obj)){
@@ -95,12 +97,13 @@ class MainController extends AbstractController{
     }
     
     /**
-     * @Route("/news/show/{$id}", name="newsShow")
+     * @Route("/news/show/{id}", name="newsShow")
      */
     public function newsSAction(Request $request, $id){
     
     	$twigVars = $this->baseVarsForTemplate();
     	$twigVars['typeForm'] = "news";
+    	$twigVars['typeFormLabel'] = "Noticia y Actualidad";
     	$em = $this->getDoctrine()->getManager();
     	$obj = $em->find("AppBundle:News", $id);
     	if (is_null($obj)){

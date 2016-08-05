@@ -7,7 +7,7 @@
 			<link rel="stylesheet" media="screen,projection" type="text/css" href="{{ asset('bundles/app/css/main.css') }}">
    			<link rel="stylesheet" media="print" type="text/css" href="{{ asset('bundles/app/css/print.css') }}">
     		<link rel="stylesheet" media="aural" type="text/css" href="{{ asset('bundles/app/css/aural.css') }}">
-    		<link rel="stylesheet" media="screen,projection" type="text/css" href="{{ asset('bundles/app/css/carrousel.css') }}">
+    		<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/carrousel.css') }}">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% javascripts
@@ -116,7 +116,7 @@
                             <h3><span>Últimas Noticias</span></h3>
                             <ul id="news">
                                 {% for n in news %}
-                                	<li {% if current is defined and n == current  %}id="active" {%  endif %}><a href="/news/show/{{ n.id }}">{{ n.name }}</a><p>{{ n.getShortDescription() }}</p></li>
+                                	<li {% if current is defined and n == current  %}id="active" {%  endif %}><a href="/news/show/{{ n.id }}">{{ n.name }}<p>{{ n.getShortDescription() }}</p></a></li>
                                 {% endfor %}
                             </ul>
             
@@ -141,6 +141,8 @@
                 </div> <!-- /page-in -->
              </div>
     	</div>
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+        <script src="{{ asset('bundles/app/js/carrousel.js') }}"/>
+        {% endblock %}
     </body>
 </html>

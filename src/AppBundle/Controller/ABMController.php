@@ -46,7 +46,7 @@ class ABMController extends AbstractController{
 		$twigVars = $this->baseVarsForTemplate();
 		$twigVars['typeForm'] = "tutorial";
 		$twigVars['typeFormLabel'] = "Tutorial";
-		return $this->abmForm($request, $twigVars, $id,"Site","Tutorial no encontrado","abmTutorial");
+		return $this->abmForm($request, $twigVars, $id,"Tutorial","Tutorial no encontrado","abmTutorial");
 	}
 	
 	protected function beforeForm(&$request,&$obj){
