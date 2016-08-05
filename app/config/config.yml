@@ -41,6 +41,7 @@ twig:
 assetic:
     debug:            "%kernel.debug%"
     use_controller:   "%kernel.debug%"
+    #read_from: '%kernel.root_dir%/../public_html'
     bundles:          [ AppBundle ]
     #java: /usr/bin/java
     filters:
